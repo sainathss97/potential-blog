@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Edit Profile
+{% endblock title %}
+    
+
+
+{% block content %}
+<div class = 'container'>
+   <div class='card-body' style =' color: eggwhite'>
+
+{% if user.is_authenticated %}
+   
+   {% if request.user == profile.user %}
+      
+  
+      
+
+<h4>Edit Profile...
+   
+</h4>
+<div class=' card-body form-group',style='color:white'>
+ <form action="." method="post" enctype='multipart/form-data'>
+     {% csrf_token %}
+     {{form.media}}
+
+      {{form.as_p}}
+      <br>
+      <button class="btn btn-info" type="submit">Update</button>
+ </form>
+</div>
+
+<hr>
+ <a class= 'btn btn-danger' href="{% url 'index' %}">Cancel?</a>
+ {% else %}
+   Youu are not the correct user change your profile don't mess around here
+   {% endif %}
+
+ {% else %}
+ <p>You shouldn't be here !!!!!!!!!!! <br>  How did you find me ? <br> <a href="{%url 'index' %}">Go Home Now!!!!</a> </p>
+ {% endif %}
+</div>
+</div>  
+ {% endblock content %}
+    

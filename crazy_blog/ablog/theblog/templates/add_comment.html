@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+  Comment on Blog Post
+{% endblock title %}
+    
+
+
+{% block content %}
+<div class = 'container'>
+   <div class='card-body' style =' color: eggwhite'>
+
+   
+
+<h4>Add a Comment on {{post}}
+   
+</h4>
+<div class=' card-body form-group',style='color:white'>
+ <form action="." method="post" '>
+     {% csrf_token %}
+     {{form.media}}
+      {{form.as_p}}
+      <br>
+      <button class="btn btn-info" type="submit">Submit</button>
+ </form>
+</div>
+
+<hr>
+ <a class= 'btn btn-danger' href="{% url 'index' %}">Cancel?</a>
+
+</div>
+</div>  
+ {% endblock content %}
+    

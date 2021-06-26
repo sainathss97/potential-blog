@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+    <h2>User Profile</h2>
+
+
+    <div class= 'container'>
+    
+
+        <div class="card mb-3" >
+            <div class="row g-0">
+              <div class="col-md-2">
+                
+                {% if  page_user.profile_pic %}
+                   <img src="{{page_user.profile_pic.url}}" width="100%" height="100%" alt="...">
+                   
+                {% else %}
+                <img src="{% static 'theblog/images/default.jpg'%}" width="100%" height="100%" alt="default">
+                {% endif %}
+                  </div>
+              <div class="col-md-10">
+                <div class="card-body">
+                  <h5 class="card-title">{{page_user.user.first_name|title}}  {{page_user.user.last_name|title}}
+                      <br>
+                      <small class="text-muted"> 
+                          
+                          {% if page_user.facebook_url %}
+                          <a class="text-muted" href="{{post.author.profile.facebook_url}}">Facebook</a> |
+        
+                          {% endif %}
+        
+                        
+                        {% if  page_user.instagram_url %}
+                            
+                        <a  class="text-muted" href="{{post.author.profile.instagram_url}}">Instagram</a> |
+                        
+                        {% endif %}
+                            
+                        
+                        {% if page_user.website_url %}
+                            
+                        <a class="text-muted" href="{{post.author.profile.website_url}}">portifolio</a> |
+                        
+                        {% endif %}
+        
+                        
+                        {% if  page_user.other_url %}
+                        <a class="text-muted" href="{{post.author.profile.other_url}}">Others</a> </small>
+                  
+                        {% endif %}
+                            
+                            
+                        <hr>
+                  </h5>
+                  <p class="card-text">{{page_user.bio|safe}}</p>
+                  <p class="card-text"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        
+        </div>
+
+        
+{% endblock content %}
+    

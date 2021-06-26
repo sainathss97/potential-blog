@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+   Create a new Category
+{% endblock title %}
+    
+
+
+{% block content %}
+<div class ='container'>
+   <div class="card-body">
+
+{% if user.is_authenticated %}
+   
+
+<h4>Add a Category </h4>
+<div class='form-group'>
+ <form action="." method="post" enctype='multipart/form-data'>
+     {% csrf_token %}
+      {{form.as_p}}
+      <br>
+      <button class="btn btn-info" type="submit">Submit</button>
+ </form>
+</div>
+
+<hr>
+ <a class= 'btn btn-danger' href="{% url 'index' %}">Cancel?</a>
+
+
+ {% else %}
+ <p>You shouldn't be here !!!!!!!!!!! <br>  How did you find me ? <br> <a href="{%url 'index' %}">Go Home Now!!!!</a> </p>
+ {% endif %}
+ 
+</div>
+</div>  
+ {% endblock content %}
+    

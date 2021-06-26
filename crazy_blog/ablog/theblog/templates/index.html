@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    
+    {% if  not user.is_authenticated %}
+        
+    <h2>Read all the Intresting Articles on My Awesome Blog </h2>
+    <hr>
+    {% endif %}
+        
+   
+
+    <br>
+
+    
+
+<div class='container card' style ="background-color:silver;" >
+    <div class ='card-body'>
+
+    {% for post in  object_list %}
+        
+            
+                
+                <p><strong>{{post.title|title}} - <a href="{% url 'category' post.cateogry %}">{{post.cateogry|title}}</a>
+                    <br> Likes : {{post.total_likes}} <br></strong> 
+                                        <small> by {{post.author}} || {{post.author.first_name}} on {{post.post_date}} </small>    <br>
+                </p>
+                {{post.snippet}}
+                {% if user.id == post.author.id %}
+
+                        <br> <a class = 'btn btn-info' href="{% url 'article_detail' post.pk %}"> View </a>
+                        <a class="btn btn-secondary" href="{% url 'update_post' post.pk %}">Edit</a>
+                        <a class="btn btn-danger" href="{% url 'delete_post' post.pk %}">Delete</a>
+                        
+                        <br>
+                        {% else %}
+                        <br> 
+                        <a class = 'btn btn-info' href="{% url 'article_detail' post.pk %}"> View </a>
+                
+                    
+                    {% endif %}
+                    <hr>
+
+                
+      {%empty%}
+      No Posts yet!! 
+
+
+            
+      {% endfor %}
+   
+   {% if user.is_authenticated %}
+         <a class = 'btn btn-primary' href="{% url 'add_post'  %}">Create a post</a>
+       <br>
+    {% else %}
+
+                
+
+    {% endif %}
+        
+    
+
+
+
+    </div>
+</div>
+    
+{% endblock content %}
+    

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+        {{cats}}
+{% endblock title %}
+
+{% block content %}
+<h2>Category: {{cats|title}}</h2>
+
+{% if cat_post %}
+   
+   
+{% for post in cat_post  %}
+  
+    <div class="card">
+        <div class="card-body">
+                <p>{{post.title}} 
+                        <small> by {{post.author}} || {{post.author.first_name}} on {{post.post_date}} </small>    <br>
+                       </p>
+                       {{post.body|safe| slice:'50'}}...  
+        </div>
+      </div>
+   {% if user.is_authenticated %}
+   <br> <a class = 'btn btn-info' href="{% url 'article_detail' post.pk %}"> View </a>
+   <a class="btn btn-secondary" href="{% url 'update_post' post.pk %}">Edit</a>
+   <a class="btn btn-danger" href="{% url 'delete_post' post.pk %}">Delete</a>
+   <hr>
+    <br>
+       {% else %}
+       <br> <a class = 'btn btn-info' href="{% url 'article_detail' post.pk %}"> View </a>
+    
+  
+       {% endif %}
+    
+    {% empty %}
+    <P>  there are no posts in here</P><p>
+            
+            {% if user.is_authenticated %}
+               
+     create a new one <a href="{% url 'add_category' %}">here</a> or add a post <a href="{% url 'add_post' %}">here</a>   </P>
+            {% endif %}
+               
+{% endfor %}
+   
+
+{% else %}
+<p> {{cats}} doesn't exist ! or It's empty
+</p>
+
+
+{% endif %}
+{% endblock content %}
+    
